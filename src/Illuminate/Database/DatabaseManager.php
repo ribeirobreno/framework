@@ -210,9 +210,9 @@ class DatabaseManager implements ConnectionResolverInterface
     protected function setPdoForType(Connection $connection, $type = null)
     {
         if ($type == 'read') {
-            $connection->setPdo($connection->getReadPdo());
+            $connection->setReadPdo($connection->getReadPdo());
         } elseif ($type == 'write') {
-            $connection->setReadPdo($connection->getPdo());
+            $connection->setPdo($connection->getPdo());
         }
 
         return $connection;
