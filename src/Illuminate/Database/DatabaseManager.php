@@ -152,8 +152,6 @@ class DatabaseManager implements ConnectionResolverInterface
      */
     protected function configure(Connection $connection, $type)
     {
-        $connection = $this->setPdoForType($connection, $type);
-
         // First we'll set the fetch mode and a few other dependencies of the database
         // connection. This method basically just configures and prepares it to get
         // used by the application. Once we're finished we'll return it back out.
@@ -181,9 +179,9 @@ class DatabaseManager implements ConnectionResolverInterface
     protected function setPdoForType(Connection $connection, $type = null)
     {
         if ($type == 'read') {
-            $connection->setPdo($connection->getReadPdo());
+            $connection->setReadPdo($connection->getReadPdo());
         } elseif ($type == 'write') {
-            $connection->setReadPdo($connection->getPdo());
+            $connection->setPdo($connection->getPdo());
         }
 
         return $connection;
